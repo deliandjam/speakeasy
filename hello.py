@@ -14,8 +14,8 @@ def create_url():
     name = request.form['name']
 
     success = create_radio(name)
-    # key = success[unicode('success')]['objectId']
-    return json.dumps({'success': True}, 200, {'ContentType': 'application/json'})
+    key = success[0][unicode('success')][unicode('objectId')]
+    return json.dumps({'success': True, 'id': key}, 200, {'ContentType': 'application/json'})
 
 if __name__ == '__main__':
     app.run()

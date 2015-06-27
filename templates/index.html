@@ -31,7 +31,7 @@
         type: "POST",
         url: "/create",
         data: {"name": $("#name").val()},
-        success: function(response){ console.log('name sent!' + response) }
+        success: function(response){ $("#room_url").val(window.location.href + "radio/" + response["id"]) }
       });
     });
     </script>
