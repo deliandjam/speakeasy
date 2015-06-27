@@ -1,0 +1,23 @@
+body {
+	margin: 0px auto;
+	background: #fff;
+}
+
+h1 {
+	font-family: Arial Bold;
+	text-shadow: 0 0 10px #FF00A2;
+	font-size: 20pt;
+	color: #fff;
+}
+
+@btn-default-border {
+	color: darken(@btn-info-bg, 5%);
+}
+
+@btn-default-color {
+	color: white;
+}
+
+@btn-default-bg {
+	background: #FF00A2;
+}
