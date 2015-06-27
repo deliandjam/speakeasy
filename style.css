@@ -1,6 +1,6 @@
 body
 {
-  background: url(tiger.jpg) no-repeat center center fixed;
+  background: url(pic/tiger.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
 
   -moz-background-size: cover;
@@ -36,12 +36,14 @@ body
 }
 
 .welcome_sign {
+  text-indent: 10px;
   font-family: "Verdana";
   color: #333333;
   font-size: 30px;
 }
 
 input[type="text"] {
+  padding-left: 10px;
   font-family: "Verdana";
   font-size: 15px;
 }
