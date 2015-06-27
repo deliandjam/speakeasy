@@ -32,6 +32,9 @@
           <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         </button>
       </div>
+      <div class="add_song">
+        <input type="text" placeholder="song" class="focus" id="song_name" required>
+      </div>
     </div>
     <div class="playlist"> PLAYLIST </div>
 
@@ -41,12 +44,20 @@
     <script src="../bootstrap-3.3.5-dist/js/bootstrap.min.js"> </script>
     <script>
 $(document).ready(function() {
+  
   $(".play button span").click(function() {
     if ($(".play button span").hasClass("glyphicon-pause")) {
         $(".play button span").attr("class", "glyphicon glyphicon-play");
     } else {
         $(".play button span").attr("class", "glyphicon glyphicon-pause");
     }
+  });
+
+  $(".add_request button").click(function() {
+    var song = $(".add_song text").val();
+
+
+    $(".add_song text").val("");
   });
 });
     </script>
