@@ -38,11 +38,12 @@ body
 .welcome_sign {
   text-indent: 10px;
   font-family: "Verdana";
-  color: #333333;
+  color: #F8F8FF;
   font-size: 30px;
 }
 
 input[type="text"] {
+  color: #F8F8FF;
   padding-left: 10px;
   font-family: "Verdana";
   font-size: 15px;
@@ -54,6 +55,7 @@ input[type="text"] {
   font-size: 15px;
 }
 #room_url{
+  color: #F8F8FF;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
