@@ -1,0 +1,14 @@
+{
+  "global": {
+    "parseVersion": "1.4.2"
+  },
+  "applications": {
+    "_default": {
+      "link": "speakeasy"
+    },
+    "speakeasy": {
+      "applicationId": "4bpR62fiuRaP4Fo3YYPL0dWzYr88dEci81nRNOOa",
+      "masterKey": "lRa8BZSIVE6k33X6VE2SNgaiWPxknF02eW9Zhpds"
+    }
+  }
+}
