@@ -17,5 +17,9 @@ def create_url():
     key = success[0][unicode('success')][unicode('objectId')]
     return json.dumps({'success': True, 'id': key}, 200, {'ContentType': 'application/json'})
 
+@app.route('/radio/<radio_id>')
+def show_radio(radio_id):
+    return render_template('user.html')
+
 if __name__ == '__main__':
     app.run()
