@@ -106,8 +106,8 @@ def get_top_request(radio_id):
      })
 
     results = json.loads(connection.getresponse().read())
-    sorted_results sorted(results[unicode('results')],
-        key=lambda result: -(result[unicode('num_likes')] - result[unicode('num_dislikes'))])
+    sorted_results = sorted(results[unicode('results')],
+        key=lambda result: -(result[unicode('num_likes')] - result[unicode('num_dislikes')]))
 
     return sorted_results[0]
 
