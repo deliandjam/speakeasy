@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return render_template('sound.html')
+    return render_template('index.html')
 
 @app.route('/create', methods = ['POST'])
 def create_url():
