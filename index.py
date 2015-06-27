@@ -23,7 +23,7 @@ def add_song(radio_id, song_url):
            "path": "/1/classes/Songs",
            "body": {
              "url": unicode(song_url),
-             "played": False,
+             "played": True,
              "num_likes": 0,
              "num_dislikes": 0,
              "radio_id": unicode(radio_id)
@@ -95,17 +95,21 @@ def get_top_request(radio_id):
     params = urllib.urlencode({"where":json.dumps({
             "radio_id": {
                 "$in": [radio_id]
+            },
+            "played": {
+                "$ne": True
             }
-        }),
-        "order":"-num_likes",
-        "limit":1
-        })
+        })})
     connection.request('GET', '/1/classes/Songs?%s' % params, '', {
        "X-Parse-Application-Id": "4bpR62fiuRaP4Fo3YYPL0dWzYr88dEci81nRNOOa",
        "X-Parse-REST-API-Key": "SDx9W7JT95o2Z9wK1qdZ5YvrOfxExKboTRaP9qKb"
      })
+
     results = json.loads(connection.getresponse().read())
-    return results
+    sorted_results sorted(results[unicode('results')],
+        key=lambda result: -(result[unicode('num_likes')] - result[unicode('num_dislikes'))])
+
+    return sorted_results[0]
 
 
 def like_song(song_id):
