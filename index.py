@@ -34,7 +34,38 @@ def create_radio():
     radio_id = json.loads(connection.getresponse().read())[0][unicode('success')][unicode('objectId')]
     print 'radio id: %s' % radio_id
 
-def 
+
+'''
+Add a new suggested song to the requests list. 
+Default values initialized as follows:
+    played: False
+    num_likes: 0
+    num_dislikes: 0
+All other values are passed in.
+'''
+def add_song(radio_id, song_url):
+    connection = httplib.HTTPSConnection('api.parse.com', 443)
+    connection.connect()
+    connection.request('POST', '/1/batch', json.dumps({
+       "requests": [
+         {
+           "method": "POST",
+           "path": "/1/classes/Songs",
+           "body": {
+             "url": song_url,
+             "played": false,
+             "num_likes": 0,
+             "num_dislikes": 0,
+             "radio_id": radio_id
+           }
+         }
+       ]
+     }), {
+       "X-Parse-Application-Id": "4bpR62fiuRaP4Fo3YYPL0dWzYr88dEci81nRNOOa",
+       "X-Parse-REST-API-Key": "SDx9W7JT95o2Z9wK1qdZ5YvrOfxExKboTRaP9qKb",
+       "Content-Type": "application/json"
+     })
+
 
 if __name__ == '__main__':
     app.run()
