@@ -3,7 +3,7 @@ from parse_rest.connection import register
 import json, httplib, urllib
 
 '''
-Increments radio_id field and returns unique key for url. 
+Increments radio_id field and returns success key. 
 '''
 def create_radio():
     connection = httplib.HTTPSConnection('api.parse.com', 443)
@@ -31,8 +31,7 @@ def create_radio():
        "X-Parse-REST-API-Key": "SDx9W7JT95o2Z9wK1qdZ5YvrOfxExKboTRaP9qKb",
        "Content-Type": "application/json"
      })
-    radio_id = json.loads(connection.getresponse().read())[0][unicode('success')][unicode('objectId')]
-    print 'radio id: %s' % radio_id
+    return json.loads(connection.getresponse().read())
 
 
 '''
@@ -42,6 +41,7 @@ Default values initialized as follows:
     num_likes: 0
     num_dislikes: 0
 All other values are passed in.
+Returns success message.
 '''
 def add_song(radio_id, song_url):
     connection = httplib.HTTPSConnection('api.parse.com', 443)
@@ -52,11 +52,11 @@ def add_song(radio_id, song_url):
            "method": "POST",
            "path": "/1/classes/Songs",
            "body": {
-             "url": song_url,
-             "played": false,
+             "url": unicode(song_url),
+             "played": False,
              "num_likes": 0,
              "num_dislikes": 0,
-             "radio_id": radio_id
+             "radio_id": unicode(radio_id)
            }
          }
        ]
@@ -65,6 +65,39 @@ def add_song(radio_id, song_url):
        "X-Parse-REST-API-Key": "SDx9W7JT95o2Z9wK1qdZ5YvrOfxExKboTRaP9qKb",
        "Content-Type": "application/json"
      })
+    return json.loads(connection.getresponse().read())
+
+
+def like_song(song_id):
+    connection = httplib.HTTPSConnection('api.parse.com', 443)
+    connection.connect()
+    connection.request('PUT', '/1/classes/Songs/%s' % song_id, json.dumps({
+       "num_likes": {
+         "__op": "Increment",
+         "amount": 1
+       }
+     }), {
+       "X-Parse-Application-Id": "4bpR62fiuRaP4Fo3YYPL0dWzYr88dEci81nRNOOa",
+       "X-Parse-REST-API-Key": "SDx9W7JT95o2Z9wK1qdZ5YvrOfxExKboTRaP9qKb",
+       "Content-Type": "application/json"
+     })
+    return json.loads(connection.getresponse().read())
+
+
+def dislike_song(song_id):
+    connection = httplib.HTTPSConnection('api.parse.com', 443)
+    connection.connect()
+    connection.request('PUT', '/1/classes/Songs/%s' % song_id, json.dumps({
+       "num_dislikes": {
+         "__op": "Increment",
+         "amount": 1
+       }
+     }), {
+       "X-Parse-Application-Id": "4bpR62fiuRaP4Fo3YYPL0dWzYr88dEci81nRNOOa",
+       "X-Parse-REST-API-Key": "SDx9W7JT95o2Z9wK1qdZ5YvrOfxExKboTRaP9qKb",
+       "Content-Type": "application/json"
+     })
+    return json.loads(connection.getresponse().read())
 
 
 if __name__ == '__main__':
