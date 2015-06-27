@@ -34,7 +34,7 @@ def create_radio():
     radio_id = json.loads(connection.getresponse().read())[0][unicode('success')][unicode('objectId')]
     print 'radio id: %s' % radio_id
 
-
+def 
 
 if __name__ == '__main__':
     app.run()
