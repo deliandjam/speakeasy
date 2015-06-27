@@ -48,6 +48,11 @@ $(document).ready(function() {
   $(".play button span").click(function() {
     if ($(".play button span").hasClass("glyphicon-pause")) {
         $(".play button span").attr("class", "glyphicon glyphicon-play");
+        $.ajax({
+          type: "POST",
+          url: window.location.href = "play",
+          success: function(response) { put_ur_function(response["url"]) }
+        })
     } else {
         $(".play button span").attr("class", "glyphicon glyphicon-pause");
     }

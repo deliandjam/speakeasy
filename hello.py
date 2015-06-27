@@ -21,5 +21,12 @@ def create_url():
 def show_radio(radio_id):
     return render_template('user.html')
 
+@app.route('/radio/<radio_id>/play', methods = ['POST'])
+def play(radio_id):
+    success = get_top_request(radio_id)
+    url = success[unicode('url')]
+    return json.dumps({'success': True, 'url': url}, 200, {'ContentType': 'application/json'})
+
+
 if __name__ == '__main__':
     app.run()
