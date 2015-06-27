@@ -27,7 +27,11 @@ def play(radio_id):
     url = success[unicode('url')]
     return json.dumps({'success': True, 'url': url}, 200, {'ContentType': 'application/json'})
 
-@app.
+@app.route('/radio/<radio_id>/request')
+def request(radio_id):
+    url = request.form['song_name']
+    success = add_song(radio_id, url)
+    return json.dumps({'success': True}, 200, {'ContentType': 'application/json'})
 
 if __name__ == '__main__':
     app.run()
