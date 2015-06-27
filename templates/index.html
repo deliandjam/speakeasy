@@ -9,7 +9,7 @@
 
     <!-- Bootstrap -->
     <link href="bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="static/style.css">
     <link 
     href='http://fonts.googleapis.com/css?family=Titillium+Web:400,400italic,700,700italic' 
     rel='stylesheet' type='text/css'>
@@ -17,7 +17,7 @@
   <body>
     <div class="header"> <h1 class="header_title">speakEasy</h1> </div>
     <div class="welcome"> <h2 class="welcome_sign">Welcome DJ, </h2>
-      <input type="text" placeholder="name" class="focus" required>
+      <input type="text" placeholder="name" class="focus" id="name" required>
     </div>
     <div class="add_room"> <button class="add_room_button"> <h3 class="share_button">share</h3></button> <input id="room_url" disabled value="http://"></div>
     
@@ -27,7 +27,12 @@
     <script src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
     <script> 
     $(".add_room_button").click(function() {
-      $.ajax()
+      $.ajax({
+        type: "POST",
+        url: "/create",
+        data: {"name": $("#name").val()},
+        success: function(response){ $("#room_url").val(window.location.href + "radio/" + response["id"]) }
+      });
     });
     </script>
   </body>
