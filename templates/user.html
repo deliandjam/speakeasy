@@ -41,13 +41,22 @@
     <script src="../bootstrap-3.3.5-dist/js/bootstrap.min.js"> </script>
     <script>
 $(document).ready(function() {
+
+  function playSong(trackUrl) {
+    $.ajax({
+      url: "http://api.soundcloud.com/resolve.json?url=" + trackUrl + "&client_id=5e878c0a4da753a596862a33ffbcc036",
+      success: function(data) {
+        var track_id = data[0].id;
+        SC.stream("/tracks/" + track_id, {autoPlay: true})}});
+  };
+
   $(".play button span").click(function() {
     if ($(".play button span").hasClass("glyphicon-pause")) {
         $(".play button span").attr("class", "glyphicon glyphicon-play");
         $.ajax({
           type: "POST",
           url: window.location.href = "play",
-          success: function(response) { put_ur_function(response["url"]) }
+          success: function(response) { playSong(response["url"]) }
         })
     } else {
         $(".play button span").attr("class", "glyphicon glyphicon-pause");
