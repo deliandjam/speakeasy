@@ -8,7 +8,7 @@
     <title>Bootstrap 101 Template</title>
 
     <!-- Bootstrap -->
-    <link href="../bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../static/user.css">
     <link 
     href='http://fonts.googleapis.com/css?family=Titillium+Web:400,400italic,700,700italic' 
@@ -32,16 +32,18 @@
           <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         </button>
       </div>
+      <div class="add_song">
+        <input type="text" placeholder="song" class="focus" id="song_name" required>
+      </div>
     </div>
     <div class="playlist"> PLAYLIST </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="../bootstrap-3.3.5-dist/js/bootstrap.min.js"> </script>
+    <script src="../static/bootstrap-3.3.5-dist/js/bootstrap.min.js"> </script>
     <script>
 $(document).ready(function() {
-
   function playSong(trackUrl) {
     $.ajax({
       url: "http://api.soundcloud.com/resolve.json?url=" + trackUrl + "&client_id=5e878c0a4da753a596862a33ffbcc036",
@@ -57,10 +59,18 @@ $(document).ready(function() {
           type: "POST",
           url: window.location.href = "play",
           success: function(response) { playSong(response["url"]) }
+
         })
     } else {
         $(".play button span").attr("class", "glyphicon glyphicon-pause");
     }
+  });
+
+  $(".add_request button").click(function() {
+    var song = $("#song_name").val();
+
+
+    $("#song_name").val("");
   });
 });
     </script>
