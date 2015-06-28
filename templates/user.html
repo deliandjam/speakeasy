@@ -60,9 +60,12 @@ $(document).ready(function() {
 
   $(".add_request button").click(function() {
     var song = $("#song_name").val();
-
-
-    $("#song_name").val("");
+    $.ajax({
+      type: "POST",
+      url: window.location.href + "/request",
+      data: {"song_name": song},
+      success: function(response) { console.log("success!"); }
+    });
   });
 });
     </script>

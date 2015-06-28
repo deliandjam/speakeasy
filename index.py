@@ -23,7 +23,7 @@ def add_song(radio_id, song_url):
            "path": "/1/classes/Songs",
            "body": {
              "url": unicode(song_url),
-             "played": True,
+             "played": False,
              "num_likes": 0,
              "num_dislikes": 0,
              "radio_id": unicode(radio_id)
